@@ -4,7 +4,6 @@ export const createNote = async (req, res, next) => {
   try {
     const { content, group } = req.body;
 
-
     if (!content || !group) {
       return res
         .status(400)
@@ -26,16 +25,22 @@ export const createNote = async (req, res, next) => {
 export const getNotes = async (req, res, next) => {
   try {
     const { group } = req.query;
+    const userId = req.user._id;
 
-    const filter = { user: req.user._id };
-    if (group) {
-      filter.group = group; 
+    if (!userId) {
+      return res.status(400).json({ message: "User ID is required" });
     }
 
-    const notes = await Note.find(filter).sort({ createdAt: -1 });
+    const filter = {
+      group: { $regex: new RegExp(`^\\s*${group}\\s*$`, "i") },
+      user: req.user._id,
+    };
+
+    const notes = await Note.find(filter);
 
     res.json(notes);
   } catch (error) {
+    console.error("Error fetching notes:", error);
     next(error);
   }
 };

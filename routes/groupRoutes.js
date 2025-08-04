@@ -8,6 +8,6 @@ import { protect } from "../middleware/authMiddleware.js";
 const router = express.Router();
 
 router.post("/create/group", protect, createGroup);
-router.get("/groups", protect, getGroups);
+router.get("/groups/", protect, getGroups);
 
 export default router;

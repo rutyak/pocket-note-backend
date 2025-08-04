@@ -13,7 +13,6 @@ const noteSchema = new mongoose.Schema(
     },
     group: {
       type: String,
-      ref: "Group",
       required: true,  
     },
   },
