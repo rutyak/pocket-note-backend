@@ -8,8 +8,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "build": "esbuild server.js --bundle --minify --platform=node --outfile=dist/server.js"
+    "build": "esbuild server.js --bundle --minify --platform=node --outfile=dist/server.js",
+    "start": "node server.js"
   },
   "dependencies": {
     "bcryptjs": "^3.0.2",
