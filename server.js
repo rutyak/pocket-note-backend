@@ -11,11 +11,20 @@ dotenv.config();
 connectDB();
 
 const app = express();
-app.use(cors());
+
+const corsOptions = {
+    origin: [
+        "http://localhost:5173",
+        "https://pocket-notes-app-new.netlify.app"
+    ],
+    methods: ["GET","POST","PATCH","DELETE"],
+}
+app.use(cors(corsOptions));
+
 app.use(express.json());
 
 app.use(authRoutes);
-app.use(noteRoutes); 
+app.use(noteRoutes);
 app.use(groupRoutes); 
 
 app.use(errorHandler);
